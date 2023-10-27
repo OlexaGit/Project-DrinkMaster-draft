@@ -22,6 +22,7 @@ export const Header = () => {
           </IconWrapper>
           Second
         </StyledLink>
+        <StyledLink to="/drinkdetails">DrinkDetails</StyledLink>
       </Navigation>
     </HeaderContainer>
   );
