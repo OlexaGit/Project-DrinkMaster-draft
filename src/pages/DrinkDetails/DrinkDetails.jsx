@@ -6,6 +6,7 @@ import {
   Button,
 } from './DrinkDetails.styled';
 import data from '../../../data/recipes.json';
+import { useEffect, useState } from 'react';
 
 // import { useState, useEffect, useRef, Suspense } from 'react';
 // import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
@@ -22,13 +23,24 @@ const DrinkDetails = () => {
   // const [isError, setIsError] = useState(false);
   // const location = useLocation();
   // const backLinkHref = useRef(location.state?.from ?? '/');
-  const favorite = true;
+
+  const [favorite, setfavorite] = useState(true);
+  // const favorite = true;
 
   // ***redax
   // const dispatch = useDispatch();
   // const handleAddToFavorite = (id) => dispatch(AddFavorite(id));
   // const handleRemoveToFavorite = (id) => dispatch(RemoveFavorite(id));
 
+  useEffect(() => {
+    function handleAddToFavorite() {
+      setfavorite(false);
+    }
+
+    function handleRemoveToFavorite() {
+      setfavorite(true);
+    }
+  }, [favorite]);
   // useEffect(() => {
   //   async function getMove() {
   //     try {
@@ -63,6 +75,14 @@ const DrinkDetails = () => {
           Remove from favorites
         </Button>
       )}
+      <div>
+        {/* <img src={drinkThumb} alt="" height={400} /> */}
+        <img
+          src="https://ftp.goit.study/img/drinkify/recipes/Quentin.jpg"
+          alt=""
+          height={400}
+        />
+      </div>
     </Container>
     // <main>
     //   <Button to={backLinkHref.current} />

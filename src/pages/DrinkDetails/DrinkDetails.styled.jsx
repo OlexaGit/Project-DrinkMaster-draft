@@ -27,10 +27,10 @@ import example from '../../../image/any-cocktail.jpg';
 // `;
 
 export const Container = styled.div`
-  display: flex;
+  // display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 500px;
+  // padding-top: 500px;
   background-color: #000000;
 `;
 
