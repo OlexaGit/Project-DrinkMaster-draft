@@ -1,25 +1,40 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SharedLayout from './components/SharedLayout/SharedLayout';
-import FirstPage from './pages/FirstPage/FirstPage';
-import SecondPage from './pages/SecondPage/SecondPage';
-import DrinkDetails from './pages/DrinkDetails/DrinkDetails';
-import HalfPage from './pages/HalfPage/HalfPage';
-import ErrorPage from './pages/ErrorPage/ErrorPage';
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const DrinksPage = lazy(() => import('./pages/DrinksPage/DrinksPage'));
+const AddDrinkPage = lazy(() => import('./pages/AddDrinkPage/AddDrinkPage'));
+const MyDrinksPage = lazy(() => import('./pages/MyDrinksPage/MyDrinksPage'));
+const FavoriteDrinkPage = lazy(() =>
+  import('./pages/FavoriteDrinkPage/FavoriteDrinkPage'),
+);
+const ErrorPage = lazy(() => import('./pages/ErrorPage/ErrorPage'));
+const DrinkDetails = lazy(() =>
+  import('./pages/DrinkDetailsPage/DrinkDetailsPage'),
+);
+
 import { AppWrapper } from './App.styled';
 
-const test = import.meta.env.VITE_API_TEST;
+// const test = import.meta.env.VITE_API_TEST;
 
 function App() {
-  console.log(test);
+  // console.log(test);
   return (
     <AppWrapper>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/first" element={<FirstPage />} />
-          <Route path="/second" element={<SecondPage />}>
-            {/* <Route path=":half" element={<HalfPage />} /> */}
-          </Route>
-          <Route path="/drinkdetails" element={<DrinkDetails />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="drinks" element={<DrinksPage />} />
+          <Route path="add" element={<AddDrinkPage />} />
+          <Route path="my" element={<MyDrinksPage />} />
+          <Route path="favorites" element={<FavoriteDrinkPage />} />
+
+          <Route path="home/:drinkId" element={<DrinkDetails />} />
+          <Route path="drinks/:drinkId" element={<DrinkDetails />} />
+          <Route path="my/:drinkId" element={<DrinkDetails />} />
+          <Route path="favorites/:drinkId" element={<DrinkDetails />} />
+
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

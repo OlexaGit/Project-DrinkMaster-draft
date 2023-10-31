@@ -1,29 +1,38 @@
+import { useState, useEffect } from 'react';
+import Logo from '../Logo/Logo';
+import Navigation from '../Navigation/Navigation';
+import ThemeToggler from '../ThemeToggler/ThemeToggler';
+import UserLogo from '../UserLogo/UserLogo';
+import { BurgerMenu } from './BurgerMenu/BurgerMenu';
 import {
-  HeaderContainer,
-  Navigation,
-  StyledLink,
-  IconWrapper,
+  HeaderContainer
 } from './Header.styled';
-import sprite from '../../assets/sprite.svg';
 
-export const Header = () => {
+const Header = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
   return (
     <HeaderContainer>
-      <Navigation>
-        <StyledLink to="/first">
-          <IconWrapper>
-            <use href={`${sprite}#icon-logo`} />
-          </IconWrapper>
-          First
-        </StyledLink>
-        <StyledLink to="/second">
-          <IconWrapper>
-            <use href={`${sprite}#icon-logo`} />
-          </IconWrapper>
-          Second
-        </StyledLink>
-        <StyledLink to="/drinkdetails">DrinkDetails</StyledLink>
-      </Navigation>
+      <Logo />
+      {windowWidth >= 1440 && <Navigation />}
+      <ThemeToggler />
+      <UserLogo />
+      {windowWidth < 1440 && <BurgerMenu />}
     </HeaderContainer>
   );
 };
+
+export default Header;
+
